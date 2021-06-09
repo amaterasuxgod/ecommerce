@@ -1,0 +1,29 @@
+{% extends '../../base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row basket-row">
+        <div class="col-xxl-4 col-md-6 col-sm-6 account-col">
+            <a href="{% url 'account:logout' %}">
+                <div class='account-button text-center mx-2 my-3'>
+                    Выйти
+                </div>
+            </a>     
+        </div>
+        <div class="col-xxl-4 col-md-6 col-sm-6 account-col">
+            <a href="{% url 'account:show_order' %}">
+                <div class='account-button text-center mx-2 my-3'>
+                    Ваши заказы
+                </div>
+            </a>   
+        </div>
+        <div class="col-xxl-4 col-md-6 col-sm-6 account-col">
+            <a href="#">
+                <div class='account-button text-center mx-2 my-3'>
+                    Редактировать профиль
+                </div>
+            </a>      
+        </div>
+    </div>
+</div>
+{% endblock content %}  

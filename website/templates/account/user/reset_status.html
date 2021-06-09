@@ -1,0 +1,22 @@
+{% extends '../../base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 d-flex align-items-center justify-content-center">
+            <div class="register-container text-center">
+                {% if 'email' in request.get_full_path %}
+                        <h3 class="mb-4">Запрос на изменение пароля обработан</h3>
+                        <p>Проверьте вашу почту на наличие дальнейших указаний</p>
+                {% endif %}
+                {% if 'complete' in request.get_full_path %}
+                     <h3 class="my-4">Пароль изменен успешно</h3>
+                     <a href="{% url 'account:login' %}" style="text-decoration: none;">Войти в аккаунт</a>
+                     <p></p>
+                {% endif%}
+            </div>
+                
+        </div>
+    </div>
+</div>
+{% endblock content %}

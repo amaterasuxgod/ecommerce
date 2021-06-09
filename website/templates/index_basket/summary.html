@@ -1,0 +1,88 @@
+{% extends '../base.html' %}
+{% load static %}
+    {% block content %}
+    <div class="container-fluid basket-container">
+        <div class="row basket-row">
+            <b><h1>Ваша корзина</h1></b>
+        </div>
+        <div class="row basket-row text-center" style='background-color: gray'>
+            <div class="col basket-col">
+                <p>Товар</p>
+            </div>
+            <div class="col basket-col">
+                <p>Описание</p>
+            </div>
+            <div class="col basket-col">
+                <p>Количество</p>
+            </div>
+            <div class="col basket-col">
+                <p>Убрать</p>
+            </div>
+            <div class="col basket-col">
+                <p>Цена</p>
+            </div>
+        </div>
+        {% for item in basket %}
+        {% with product=item.product %}
+        <div class="row basket-row1 text-center" data-index="{{product.id}}">
+            <div class="col">
+                {% for image in product.product_image.all %}
+                    {% if image.is_feature %}
+                <img src="{{ image.image.url }}" alt="" width='50' height="50">
+                    {% endif %}
+                {% endfor %}
+                <a href="{% url 'index:pc-detail' product.id %}" class='text-decoration-none text-reset'><p>{{ product.title }}</p></a>
+            </div>
+            <div class="col">
+                <p>{{ product.description}}</p>
+            </div>
+            <div class="col">
+                <p>{{ item.qty }}</p>
+            </div>
+            <div class="col">
+               <button id="basket-delete-item" data-index="{{product.id}}" class='delete-button'><i class="fas fa-times"></i></button>
+            </div>
+            <div class="col">
+                <p>{{ item.price }} BYN</p>
+            </div>
+        </div>
+        {% endwith %}
+        {% endfor %}
+        <div class="row subtotal-row text-end">
+            <div class="col-12">
+                <h1 class='total-sum' id='total-sum'>Сумма заказа: {{ basket.get_total_price }} BYN</h1> 
+                {% if subtotal %}
+                <a href="{% url 'orders:create_order' %}"><button type="button" class="btn btn-info" id='order_btn' style="margin-top: 40px">Оформить заказ</button></a>
+                {% else %}
+                <p></p>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script>
+        $(document).on('click', '.delete-button', function (e) {
+        e.preventDefault();
+        var prodid = $(this).data('index');
+        $.ajax({
+          type: 'POST',
+          url: '{% url "basket:basket_delete" %}',
+          data: {
+            productid: $(this).data('index'),
+            csrfmiddlewaretoken: "{{csrf_token}}",
+            action: 'post'
+          },
+          success: function (json) {
+              $('.basket-row1[data-index="'+ prodid +'"]').remove();
+              $('#total-sum').text("Сумма заказа: " + json.subtotal + " BYN");
+              document.getElementById('basket_qty').innerHTML = json.qty;
+              if (parseFloat(json.subtotal)==parseFloat(0)){
+                document.getElementById('order_btn').remove();
+              }
+          },
+          error: function (xhr, errmsg, err) {}
+        });
+      })
+    </script>
+    {% endblock content %}
