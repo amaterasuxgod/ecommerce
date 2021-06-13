@@ -2,9 +2,6 @@
 {% load static %}
     {% block content %}
     <div class="container-fluid basket-container">
-        <div class="row basket-row1" style="border:none;">
-            <h3 style="margin-bottom: 50px;">Ваши заказы:</h3>
-        </div>
         {% for order in orders %}
         <div class="row basket-row1" style="border-top: none;">
             <h3 class='mb-3'>Дата заказа: {{ order.created }}</h3>

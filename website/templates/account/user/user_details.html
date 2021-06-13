@@ -21,15 +21,33 @@
                     <label style="display:block;" class="my-4">Введите почтовый индекс</label>
                     {{ user_edit_form.postcode }}
                     <label style="display:block;" class="my-4">Введите адрес</label>
-                    {{ user_edit_form.address_line_1 }}
+                    {{ user_edit_form.address_line_1 }} 
                     <label style="display:block;" class="my-4">Введите город</label>
                     {{ user_edit_form.town_city }}
                     <br>
-                    <button class="btn btn-info my-4 register-button" type="submit" value="Log-in">Сохранить информацию</button>
+                    <button id='user_det_confirm' class="btn btn-info my-4 register-button" type="submit" value="Log-in">Сохранить информацию</button>
                 </form>
             </div>
                 
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="download1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content mymodal-content rounded-5">
+        <div class="modal-body my-modal-body">
+            <p>Информация обновлена</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script>
+    $('.account-form').on('submit', function(event){
+    event.preventDefault();
+    $("#download1").modal("show");
+});
+</script>
 {% endblock content %}
