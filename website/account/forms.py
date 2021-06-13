@@ -56,3 +56,28 @@ class PwdResetConfirmForm(SetPasswordForm):
     new_password2 = forms.CharField(
         label='Repeat password', widget=forms.PasswordInput(
             attrs={'placeholder': 'New Password', 'id': 'form-new-pass2'}))
+
+
+class UserEditForm(forms.ModelForm):
+
+    email = forms.CharField(widget=forms.TextInput(
+            attrs={'readonly': 'readonly'}))
+    
+    phone_number = forms.CharField(min_length=4, max_length=50)
+
+    postcode = forms.CharField()
+
+    address_line_1 = forms.CharField()
+
+    town_city = forms.CharField()
+
+    class Meta:
+        model = UserBase
+        fields = ('email', 'phone_number', 'postcode', 'address_line_1', 'town_city',)
+    
+
+    def __init__(self, *args, **kwargs):
+      super().__init__(*args, **kwargs)
+
+
+    

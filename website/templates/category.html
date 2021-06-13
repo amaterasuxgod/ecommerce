@@ -14,4 +14,14 @@
         </div>
     {% endfor %}
     </section>
+    <div class="row basket-row1" style="border:none;">
+        <div class="col-12 text-center">
+            {% if products.has_previous %}
+            <a href="{{ category.get_absolute_url }}?page={{ products.previous_page_number }}" style="color: white; text-decoration: none;" class="mx-3">Предыдущая страница</a>
+            {% endif %}
+            {% if products.has_next %}
+            <a href="{{ category.get_absolute_url }}?page={{ products.next_page_number }}" style="color: white; text-decoration: none;" class="mx-3">Следующая страница</a>
+            {% endif %}
+        </div>
+    </div>
 {% endblock content %}

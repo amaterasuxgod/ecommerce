@@ -43,6 +43,7 @@
     </div>
     <section class="products-section">
       {% for item in object_list %}
+        {% if item.product_is_featured %}
       <div class="products-section-item">
           {% for image in item.product_image.all %}
           {% if image.is_feature %}
@@ -53,6 +54,7 @@
           <p>{{ item.regular_price }} руб.</p>
           <i class="fas fa-2x fa-long-arrow-alt-right"></i>
       </div>
+       {% endif %}
       {% endfor %}
       </section>
     {% endblock content %}

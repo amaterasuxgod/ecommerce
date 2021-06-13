@@ -10,7 +10,7 @@ from .models import UserBase
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from orders.views import user_orders
-
+from .forms import UserEditForm
 
 
 
@@ -24,6 +24,20 @@ def dashboard(request):
 def show_order(request):
     orders = user_orders(request)
     return render(request, 'account/user/user_orders.html', {'orders': orders})
+
+
+@login_required
+def edit_details(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+
+        if user_form.is_valid():
+            user_form.save()
+    else:
+        user_form = UserEditForm(instance=request.user)
+
+    return render(request,
+                  'account/user/user_details.html', {'user_edit_form': user_form})
 
 def account_register(request):
 

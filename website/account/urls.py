@@ -1,12 +1,13 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import account_register, account_activate, dashboard, show_order
+from .views import account_register, account_activate, dashboard, show_order, edit_details
 from .forms import PwdResetForm, PwdResetConfirmForm
 from django.views.generic import TemplateView
 
 app_name = 'account'
 
 urlpatterns = [
+    path('edit_details/', edit_details, name="edit_details"),
     path('orders/', show_order, name="show_order"),
     path('logout/', auth_views.LogoutView.as_view(next_page='account:login'), name="logout"),
     path('login/', auth_views.LoginView.as_view(template_name='account/registration/login.html'), name="login"),

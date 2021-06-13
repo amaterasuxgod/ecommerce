@@ -1,0 +1,35 @@
+{% extends '../../base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 d-flex align-items-center justify-content-center">
+            <div class="register-container text-center">
+                <form action="." method="post" class="account-form">
+                    {% csrf_token %}
+                    <h3 class='mt-4' style="color: white;">Изменить личную информацию</h3>
+
+                    {% if user_edit_form.errors %}
+                    <div class="alert alert-primary" role="alert">
+                        {{ user_edit_form.errors }}
+                    </div>
+                    {% endif %}
+                    <label style="display:block;" class="my-4">Ваш email</label>
+                    {{ user_edit_form.email }}
+                    <label style="display:block;" class="my-4">Введите номер телефона</label>
+                    {{ user_edit_form.phone_number }}
+                    <label style="display:block;" class="my-4">Введите почтовый индекс</label>
+                    {{ user_edit_form.postcode }}
+                    <label style="display:block;" class="my-4">Введите адрес</label>
+                    {{ user_edit_form.address_line_1 }}
+                    <label style="display:block;" class="my-4">Введите город</label>
+                    {{ user_edit_form.town_city }}
+                    <br>
+                    <button class="btn btn-info my-4 register-button" type="submit" value="Log-in">Сохранить информацию</button>
+                </form>
+            </div>
+                
+        </div>
+    </div>
+</div>
+{% endblock content %}

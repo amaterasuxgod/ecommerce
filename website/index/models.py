@@ -54,6 +54,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.RESTRICT)
     title = models.CharField(verbose_name=_("title"), help_text=_("Required"), max_length=255)
     description = models.TextField(verbose_name=_("description"), help_text=_("Not required"), blank=True)
+    product_is_featured = models.BooleanField(verbose_name='Product featured', default=False)
     slug = models.SlugField(max_length=255)
     is_available = models.BooleanField(verbose_name='Product availability', default=True)
     regular_price = models.FloatField(verbose_name=_("Regular price"), help_text=_("Максимально 10 цифр"))
