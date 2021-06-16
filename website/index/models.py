@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
+from account.models import UserBase
 
 class Category(MPTTModel):
     name = models.CharField(verbose_name=_("Category Name"),help_text=_('Required and unique'),max_length=255,unique=True)
@@ -100,5 +101,15 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = _("Product Image")
         verbose_name_plural = _("Product Images")
-    
+
+
+class Comment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_comment")
+    user = models.ForeignKey(UserBase, on_delete=models.CASCADE)
+    body = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return '%s - %s' % (self.product.title, self.user)    
 

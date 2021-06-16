@@ -1,5 +1,35 @@
 {% extends "base.html"%}
 {% block content %}
+{% for object in object %}
+
+<style>
+  .account-form input{
+    padding: 50px 5px;
+    margin: 50px 0px;
+  }
+
+  .modal_head {
+    padding: 0;
+  }
+</style>
+
+
+<div class="modal fade" id="download2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content mymodal-content rounded-5">
+      <div class="modal-header my-modal-header modal_head text-center">
+          <form action="." method="POST" class='account-form'>
+          {% csrf_token %}
+          {{ form.body }}
+          <button type="submit" class="btn btn-outline-secondary mb-4">Опубликовать комментарий</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <div class="container-fluid products-detail-nav" style="margin-bottom:50px;">
   <div class="row products-detail-row1">
     <div class="col-6 products-detail-column-1" style="padding: 0px">
@@ -12,7 +42,7 @@
             <div class="navbar-nav products-detail-nav-item">
               <a class="nav-link active" aria-current="page" href="#">Описание</a>
               <a class="nav-link" href="#specifications">Характеристики</a>
-              <a class="nav-link" href="#">Отзывы</a>
+              <a class="nav-link" onclick="showmodal2()">Отзывы</a>
             </div>
           </div>
         </div>
@@ -69,4 +99,43 @@
     </div>
   </div>
 </div>
+
+{% if comments %}
+{% for comment in comments%}
+<div class="row basket-row text-center" style='background-color: gray'>
+  <div class="col basket-col">
+      <p>Пользователь</p>
+  </div>
+  <div class="col basket-col">
+      <p>Отзыв</p>
+  </div>
+  <div class="col basket-col">
+      <p>Дата</p>
+  </div>
+</div>
+<div class="row basket-row text-center" style="color: white;">
+  <div class="col basket-col">
+      <p>{{ comment.user }}</p>
+  </div>
+  <div class="col basket-col">
+      <p>{{ comment.body }}</p>
+  </div>
+  <div class="col basket-col">
+      <p>{{ comment.created }}</p>
+  </div>
+</div>
+{% endfor %}
+{% else %}
+<div class="row basket-row" style="color: white">
+  <b><h1>Об этом товаре пока нет отзывов</h1></b>
+</div>
+{% endif %}
+{% endfor %}
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script>
+  function showmodal2()
+{
+$("#download2").modal("show");
+};
+</script>
 {% endblock content %}

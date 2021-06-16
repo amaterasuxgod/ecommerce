@@ -1,6 +1,9 @@
+from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
-from .models import Product, Category
+from django.contrib.auth.decorators import login_required
+from .forms import Comment_form
+from .models import Product, Category, Comment
 from django.core.paginator import EmptyPage, Paginator
 
 # Create your views here.
@@ -37,6 +40,23 @@ class indexView(ListView):
 class ItemDetailView(DetailView):
     model = Product
     template_name = './products_detail.html'
+
+    def get(self,request,pk):
+        commentForm = Comment_form()
+        object = Product.objects.filter(id=pk)
+        product = Product.objects.get(id=pk)
+        id = product.id
+        comments = Comment.objects.filter(product_id=id)
+        return render(request, self.template_name, {'object':object, 'form':commentForm, 'comments': comments})
+    
+    def post(self,request,pk):
+        commentForm = Comment_form(request.POST)
+        user = request.user
+        object = Product.objects.get(id=pk)
+        id = object.id
+        if commentForm.is_valid():
+            Comment.objects.create(product_id=id,user=user,body=commentForm.cleaned_data['body'])
+            return HttpResponse('Комментарий сохранен')
 
 
 
