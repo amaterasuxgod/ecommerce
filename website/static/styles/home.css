@@ -33,6 +33,7 @@ body {
 
 .mycontainer i:hover{
     color:white;
+    cursor: pointer;
 }
 
 .mycontainer a:focus{
@@ -265,6 +266,10 @@ footer a {
 
 footer a:hover{
     color: white;
+}
+
+footer div a:hover{
+    color:white;
 }
 
 
@@ -516,6 +521,11 @@ footer a:hover{
     .bigcontainer {
         display: none;
     }
+
+    hr {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
     
     .mycol {
         display: none;
@@ -550,6 +560,14 @@ footer a:hover{
 
     .price {
         font-size: 20px;
+    }
+
+    footer {
+        padding: 0 10px;
+    }
+
+    .footer-foot {
+        padding: 0 10px;
     }
 
     .products-detail-column-2 {

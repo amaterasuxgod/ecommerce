@@ -33,6 +33,7 @@ def edit_details(request):
 
         if user_form.is_valid():
             user_form.save()
+            return redirect('account:dashboard')
     else:
         user_form = UserEditForm(instance=request.user)
 
@@ -63,7 +64,7 @@ def account_register(request):
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject=subject, message=message)
-            return HttpResponse('Регистрация прошла успешно, вам на почту отправлена ссылка для активации аккаунта')
+            return render(request, 'account/registration/registration_success.html')
     
     else:
         registerForm = RegistrationForm()

@@ -15,7 +15,7 @@ class Basket():
 
         if product_id in self.basket:
             self.basket[product_id]['qty'] = self.basket[product_id]['qty'] + int(1)
-            self.basket[product_id]['price'] = float(self.basket[product_id]['price']) + float(product.regular_price)
+            self.basket[product_id]['price'] = float(float(self.basket[product_id]['price']) + float(product.regular_price))
         else:
             self.basket[product_id] = {'price': float(product.regular_price), 'qty': int(1)}
 
@@ -41,7 +41,7 @@ class Basket():
 
 
     def get_total_price(self):
-        return sum(float(item['price']) for item in self.basket.values())
+        return float(sum(float(item['price']) for item in self.basket.values()))
     
 
     def delete(self, product):

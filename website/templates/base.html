@@ -39,7 +39,7 @@
                                 <i class="fas fa-bars ms-3 desktop-nav-icon" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                     {% for category in categories %}
-                                    <li><a href=" {{ category.get_absolute_url }} ">{{ category.name }}</a></li>
+                                    <li><a href=" {{ category.get_absolute_url }} " >{{ category.name }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -96,65 +96,87 @@
     <h1 class="title2">Cyberfy</h1>
    <hr>
    <footer>
-       <div class='footer-area-1'>
+       <div class='footer-area-1 text-center'>
            <b><h3>Клавиатуры</h3></b>
            <br>
-           <p>title1</p>
-           <p>title2</p>
-           <p>title3</p>
-           <p>title4</p>
-           <p>title5</p>
-           <p>title6</p>
-           <p>title7</p>
-           <p>title8</p>
-           <p>title9</p>
-           <p>title10</p>
-           <p>title11</p>
-           <p>title12</p>
-           <p>title13</p>
-           <p>title14</p>
+           {% for product in featured_products %}
+            {% if product.category.name == 'Клавиатуры' %}
+           <a href="{% url 'index:pc-detail' product.id %}">{{ product.title }}</a>
+            {% else %}
+            <p></p>
+            {% endif %}
+           {% endfor %}
+           <br>
        </div>
-       <div class='footer-area-2'>
+       <div class='footer-area-2 text-center'>
            <b><h3>Компьютеры</h3></b>
            <br>
-           <p>title1</p>
-           <p>title2</p>
-           <p>title3</p>
-           <p>title4</p>
+           {% for product in featured_products %}
+            {% if product.category.name == 'Компьютеры' %}
+           <a href="{% url 'index:pc-detail' product.id %}">{{ product.title }}</a>
+            {% else %}
+            <p></p>
+            {% endif %}
+           {% endfor %}
            <br>
            <b><h3>Мышки</h3></b>
            <br>
-           <p>title1</p>
-           <p>title2</p>
+           {% for product in featured_products %}
+            {% if product.category.name == 'Мышки' %}
+           <a href="{% url 'index:pc-detail' product.id %}">{{ product.title }}</a>
+            {% else %}
+            <p></p>
+            {% endif %}
+           {% endfor %}
+           <br>
        </div>
-       <div class='footer-area-3'>
+       <div class='footer-area-3 text-center'>
            <b><h3>Наушники</h3></b>
            <br>
-           <p>title1</p>
-           <p>title2</p>
+           {% for product in featured_products %}
+            {% if product.category.name == 'Наушники' %}
+           <a href="{% url 'index:pc-detail' product.id %}">{{ product.title }}</a>
+            {% else %}
+            <p></p>
+            {% endif %}
+           {% endfor %}
            <br>
            <b><h3>Кресла</h3></b>
            <br>
+           {% for product in featured_products %}
+            {% if product.category.name == 'Кресла' %}
+           <a href="{% url 'index:pc-detail' product.id %}">{{ product.title }}</a>
+            {% else %}
+            <p></p>
+            {% endif %}
+           {% endfor %}
+           <br>
            <b><h3>Аксессуары</h3></b>
            <br>
-           <p>title1</p>
-           <p>title2</p>
-           <p>title3</p>
-           <p>title4</p>
+           {% for product in featured_products %}
+           {% if product.category.name == 'Аксессуары' %}
+          <a href="{% url 'index:pc-detail' product.id %}">{{ product.title }}</a>
+           {% else %}
+           <p></p>
+           {% endif %}
+          {% endfor %}
+          <br>
        </div>
-       <div class='footer-area-4'>
+       <div class='footer-area-4 text-center'>
            <b><h3>Компания</h3></b>
            <br>
            <a href="{% url 'index:contacts' %}">Контакты</a>
            <a href="{% url 'index:policy' %}">Политика конфиденциальности</a>
+           <br>
        </div>
-       <div class='footer-area-5'>
+       <div class='footer-area-5 text-center'>
            <b><h3>Магазин</h3></b>
            <br>
            <a href="{% url 'index:payment' %}">Оплата</a>
            <a href="{% url 'index:delivery' %}">Доставка</a>
+           <br>
        </div>
-       <div class='footer-area-6'>
+       <div class='footer-area-6 text-center'>
            <b><h3>Служба поддержки</h3></b>
            <br>
            <p>+375 (29) 789-23-75</p>
@@ -163,8 +185,8 @@
        </div>
    </footer>
    <hr>
-   <div class="footer-foot">
-       <div class="foot-container">
+   <div class="footer-foot ">
+       <div class="foot-container text-center">
            <p class='foot-text1'>Copyright 2200-2021 Cyberfy</p>
            <p class='foot-text2'>All rights reserved</p>
        </div>

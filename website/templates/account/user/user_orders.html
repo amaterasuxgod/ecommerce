@@ -28,7 +28,7 @@
         </div>
         {% for item in order.items.all %}
         <div class="row basket-row1 text-center" style='margin-bottom: 100px;'>
-            <div class="col">
+            <div class="col d-flex flex-column align-items-center justify-content-center">
                 {% for image in item.product.product_image.all %}
                     {% if image.is_feature %}
                 <img src="{{ image.image.url }}" alt="" width='50' height="50">
@@ -36,13 +36,13 @@
                 {% endfor %}
                 <a href="{% url 'index:pc-detail' item.product.id %}" class='text-decoration-none text-reset'><p>{{ item.product.title }}</p></a>
             </div>
-            <div class="col">
+            <div class="col d-flex flex-column align-items-center justify-content-center">
                 <p>{{ item.product.description}}</p>
             </div>
-            <div class="col">
+            <div class="col d-flex flex-column align-items-center justify-content-center">
                 <p>{{ item.quantity }}</p>
             </div>
-            <div class="col">
+            <div class="col d-flex flex-column align-items-center justify-content-center">
                 <p>{{ item.price }} BYN</p>
             </div>
         </div>

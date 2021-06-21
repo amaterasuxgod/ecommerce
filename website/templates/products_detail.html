@@ -6,6 +6,7 @@
   .account-form input{
     padding: 50px 5px;
     margin: 50px 0px;
+    width: 80%;
   }
 
   .modal_head {
@@ -13,21 +14,29 @@
   }
 </style>
 
-
+{% if user.is_authenticated %}
 <div class="modal fade" id="download2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content mymodal-content rounded-5">
-      <div class="modal-header my-modal-header modal_head text-center">
+    <div class="modal-content mymodal-content rounded-5 text-center">
           <form action="." method="POST" class='account-form'>
           {% csrf_token %}
           {{ form.body }}
           <button type="submit" class="btn btn-outline-secondary mb-4">Опубликовать комментарий</button>
           </form>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="modal fade" id="download2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content mymodal-content rounded-5">
+      <div class="modal-header my-modal-header modal_head text-center">
+         <h3 style="color:white" class="my-4">Вы должны быть авторизованы, чтобы оставить комментарий</h3>
       </div>
     </div>
   </div>
 </div>
-
+{%endif%}
 
 
 <div class="container-fluid products-detail-nav" style="margin-bottom:50px;">
@@ -71,10 +80,10 @@
     </div>
     <div class="col-lg products-detail-column-2 my-2">
       <h1>{{ object.title }}</h1>
-      <p>{{ object.description }}</p>
+      <p class="my-4">{{ object.description }}</p>
       <h2 class='product-detail-price'>{{ object.regular_price}} BYN</h2>
       {% if object.is_available %}
-      <button type="button" id='add-button' value='{{ object.id }}' class="btn btn-light">В корзину</button>
+      <button type="button" id='add-button' value='{{ object.id }}' class="btn btn-light my-4">В корзину</button>
       {% else %}
       <h1 style="color: white">Нет в наличии</h1>
       {% endif %}

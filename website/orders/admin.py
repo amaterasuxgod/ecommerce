@@ -3,5 +3,13 @@ from .models import Order, OrderItem
 
 # Register your models here.
 
-admin.site.register(Order)
-admin.site.register(OrderItem)
+
+class OrderSpecificationInline(admin.TabularInline):
+    model = OrderItem
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    inlines = [
+       OrderSpecificationInline,
+    ]

@@ -25,7 +25,7 @@
         {% for item in basket %}
         {% with product=item.product %}
         <div class="row basket-row1 text-center" data-index="{{product.id}}">
-            <div class="col">
+            <div class="col d-flex flex-column align-items-center justify-content-center">
                 {% for image in product.product_image.all %}
                     {% if image.is_feature %}
                 <img src="{{ image.image.url }}" alt="" width='50' height="50">
@@ -33,16 +33,16 @@
                 {% endfor %}
                 <a href="{% url 'index:pc-detail' product.id %}" class='text-decoration-none text-reset'><p>{{ product.title }}</p></a>
             </div>
-            <div class="col">
+            <div class="col d-flex flex-column align-items-center justify-content-center">
                 <p>{{ product.description}}</p>
             </div>
-            <div class="col">
+            <div class="col d-flex flex-column align-items-center justify-content-center">
                 <p>{{ item.qty }}</p>
             </div>
-            <div class="col">
+            <div class="col d-flex flex-column align-items-center justify-content-center">
                <button id="basket-delete-item" data-index="{{product.id}}" class='delete-button'><i class="fas fa-times"></i></button>
             </div>
-            <div class="col">
+            <div class="col d-flex flex-column align-items-center justify-content-center">
                 <p>{{ item.price }} BYN</p>
             </div>
         </div>
@@ -58,6 +58,7 @@
             {% endif %}
             </div>
         </div>
+        <br>
     </div>
 
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>

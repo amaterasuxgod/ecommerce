@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
 from .forms import Comment_form
@@ -11,6 +11,11 @@ from django.core.paginator import EmptyPage, Paginator
 def categories(request):
     return {
         'categories': Category.objects.all()
+    }
+
+def products(request):
+    return {
+        'featured_products': Product.objects.all()
     }
 
 def search(request):
@@ -50,13 +55,16 @@ class ItemDetailView(DetailView):
         return render(request, self.template_name, {'object':object, 'form':commentForm, 'comments': comments})
     
     def post(self,request,pk):
-        commentForm = Comment_form(request.POST)
-        user = request.user
-        object = Product.objects.get(id=pk)
-        id = object.id
-        if commentForm.is_valid():
-            Comment.objects.create(product_id=id,user=user,body=commentForm.cleaned_data['body'])
-            return HttpResponse('Комментарий сохранен')
+        if request.user.is_authenticated:
+            commentForm = Comment_form(request.POST)
+            user = request.user
+            object = Product.objects.get(id=pk)
+            id = object.id
+            if commentForm.is_valid():
+                Comment.objects.create(product_id=id,user=user,body=commentForm.cleaned_data['body'])
+                return render(request,'comment_saved.html')
+        else:
+            return redirect('account:login')
 
 
 
