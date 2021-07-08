@@ -41,7 +41,9 @@ class Basket():
 
 
     def get_total_price(self):
-        return float(sum(float(item['price']) for item in self.basket.values()))
+        summ = float(sum(float(item['price']) for item in self.basket.values()))
+        final_summ = float("{:.2f}".format(summ))
+        return final_summ
     
 
     def delete(self, product):

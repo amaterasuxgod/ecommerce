@@ -562,9 +562,14 @@ footer div a:hover{
         font-size: 20px;
     }
 
+    .title2 {
+        margin-left: 10px;
+    }
+
     footer {
         padding: 0 10px;
     }
+
 
     .footer-foot {
         padding: 0 10px;

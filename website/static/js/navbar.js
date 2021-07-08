@@ -5,6 +5,7 @@ const nav1 = document.getElementById("container-mob");
 
 btn1.addEventListener("click", () => {
     nav1.classList.add("mobile-nav-content-show");
+    nav1.style.transition = 'all 1s ease-in-out 1s';
     btn1.style.display = 'none';
     btn2.style.display = 'block';
 });
