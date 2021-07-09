@@ -1,6 +1,16 @@
 {% extends "base.html"%}
 {% load static %}
     {% block content %}
+    <style>
+      .products-section-item:hover{
+        background-color: #3a3535;
+        transition: all 0.3s;
+      }
+    </style>
+
+
+
+
     <div class="mycontainer1">
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
@@ -45,14 +55,16 @@
       {% for item in object_list %}
         {% if item.product_is_featured %}
       <div class="products-section-item">
+          <a href="{% url 'index:pc-detail' item.id %}">
           {% for image in item.product_image.all %}
           {% if image.is_feature %}
           <img src="{{ image.image.url }}" alt="" width='330' height='330'>
           {% endif %}
           {% endfor %}
-          <h3 class='products-item-title'><a href="{% url 'index:pc-detail' item.id %}">{{ item.title }}</a></h1>
+          <h3 class='products-item-title'>{{ item.title }}</h3>
           <p>{{ item.regular_price }} руб.</p>
           <i class="fas fa-2x fa-long-arrow-alt-right"></i>
+        </a>
       </div>
        {% endif %}
       {% endfor %}

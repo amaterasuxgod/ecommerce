@@ -10,9 +10,6 @@
                 <p>Товар</p>
             </div>
             <div class="col basket-col">
-                <p>Описание</p>
-            </div>
-            <div class="col basket-col">
                 <p>Количество</p>
             </div>
             <div class="col basket-col">
@@ -32,9 +29,6 @@
                     {% endif %}
                 {% endfor %}
                 <a href="{% url 'index:pc-detail' product.id %}" class='text-decoration-none text-reset'><p>{{ product.title }}</p></a>
-            </div>
-            <div class="col d-flex flex-column align-items-center justify-content-center">
-                <p>{{ product.description}}</p>
             </div>
             <div class="col d-flex flex-column align-items-center justify-content-center">
                 <p>{{ item.qty }}</p>

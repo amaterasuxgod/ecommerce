@@ -96,7 +96,7 @@ body {
 }
 
 .container-mob {
-    display: none;
+    display:none;
 }
 
 .container-mob li a{
@@ -169,7 +169,7 @@ body {
 }
 
 
-.products-item-title a:hover{
+.products-item-title:hover{
     color:white;
 }
 

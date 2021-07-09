@@ -65,7 +65,7 @@
     <div class="col-lg">
       {% for image in object.product_image.all %}
       {% if image.is_feature %}
-        <div class="big-image-container my-2 d-flex justify-content-center align-items-center">
+        <div class="big-image-container my-2 d-flex justify-content-center align-items-center" id="big-image-container">
             <img src="{{ image.image.url }}" alt="">
         </div>
       {% endif %}
